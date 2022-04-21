@@ -3,20 +3,21 @@ import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { clearUser } from "../redux/actions/userAction";
 import { useHistory } from "react-router";
 
+import { clearUser } from "../actions";
+
 const Header = () => {
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const dispatch = useDispatch();
+  const history = useHistory();
   const handleLogout = (e) => {
-    e.preventDefault()
-    localStorage.removeItem("token")
-    dispatch(clearUser())
-    history.push("/login")
-  }
-  const loginUser = useSelector((state) => state?.userReducer?.userinfo);
-  const isLoggedIn = useSelector((state) => state?.userReducer?.isLoggedIn);
+    e.preventDefault();
+    localStorage.removeItem("token");
+    dispatch(clearUser());
+    history.push("/login");
+  };
+  const loginUser = useSelector((state) => state?.data?.userinfo);
+  const isLoggedIn = useSelector((state) => state?.data?.isLoggedIn);
 
   return (
     <div className="navbar-fixed">
@@ -102,4 +103,4 @@ const Header = () => {
   );
 };
 
-export default Header
+export default Header;

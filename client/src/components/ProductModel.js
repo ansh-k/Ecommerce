@@ -2,10 +2,15 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { FaCartPlus } from "react-icons/fa";
 
-export default function ProductModel({ handleModal, open, selectedProduct, handleCart }) {
-  return ( 
+export default function ProductModel({
+  handleModal,
+  open,
+  selectedProduct,
+  handleCart,
+}) {
+  return (
     <Modal show={open} onHide={handleModal}>
-      <Modal.Header className="bg-warning text-light" closeButton >
+      <Modal.Header className="bg-warning text-light" closeButton>
         <Modal.Title>
           {" "}
           <strong> {selectedProduct.productName} </strong>{" "}
@@ -16,12 +21,12 @@ export default function ProductModel({ handleModal, open, selectedProduct, handl
           <img
             className="modal-img"
             src={selectedProduct.image}
-            onClick={()=>handleModal}
+            onClick={() => handleModal}
             alt="Card"
           />
           <div className="mt-4">
-          <strong>Price: ${selectedProduct.price} </strong>
-          <p> Stock: {selectedProduct.stock} </p>
+            <strong>Price: ${selectedProduct.price} </strong>
+            <p> Stock: {selectedProduct.stock} </p>
           </div>
         </div>
       </Modal.Body>
@@ -36,6 +41,5 @@ export default function ProductModel({ handleModal, open, selectedProduct, handl
         </button>
       </Modal.Footer>
     </Modal>
-
   );
 }

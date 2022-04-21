@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
-import { addToCart } from "../redux/operations/carts"
 import { toast } from "react-toastify";
+
 import Model from "./ProductModel";
+import { addToCart } from "../actions";
 
 const ProductList = ({ products }) => {
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleCart = (val) => {
-    addToCart(val).then(res => {
-      if (res && res.data) {
-        toast(res.data, { type: "success" });
-        setOpen(false)
-      }
-      else {
+    addToCart(val)
+      .then((res) => {
+        if (res && res.data) {
+          toast(res.data, { type: "success" });
+          setOpen(false);
+        } else {
+          toast("something went wrong!", { type: "error" });
+          setOpen(false);
+        }
+      })
+      .catch((err) => {
         toast("something went wrong!", { type: "error" });
-        setOpen(false)
-      }
-    }).catch(err => {
-      toast("something went wrong!", { type: "error" });
-    })
+      })
       .catch((err) => {
         console.log(err);
         setOpen(false);

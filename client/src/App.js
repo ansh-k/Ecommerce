@@ -1,17 +1,19 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { Route, Switch } from "react-router-dom";
+import { toast } from "react-toastify";
+import { injectStyle } from "react-toastify/dist/inject-style";
+
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PageNotFound from "./pages/PageNotFound";
 import Cart from "./pages/Cart";
-import { toast } from "react-toastify";
-import { injectStyle } from "react-toastify/dist/inject-style";
 import "./App.css";
 import Header from "./components/Header";
-import { getUser } from "./redux/actions/userAction";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { getUser } from "./actions";
+
 
 if (typeof window !== "undefined") {
   injectStyle();
@@ -20,7 +22,7 @@ if (typeof window !== "undefined") {
 function App() {
   const dispatch = useDispatch()
   const history = useHistory();
-  const isLoggedIn = useSelector(state => state?.userReducer?.isLoggedIn);
+  const isLoggedIn = useSelector(state => state?.data?.isLoggedIn);
   
   useEffect(() => {
     toast.configure()
