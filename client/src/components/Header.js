@@ -24,7 +24,7 @@ const Header = () => {
       <Navbar className="bg-dark " expand="lg">
         <Container>
           <Navbar.Brand href="#" className="text-white">
-            Ecom-Task
+            Ecommerce-Clothing
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse

@@ -28,6 +28,13 @@ export default function ProductModel({
             <strong>Price: ${selectedProduct.price} </strong>
             <p> Stock: {selectedProduct.stock} </p>
           </div>
+          <small>
+            The lorem ipsum is a placeholder text used in publishing and graphic
+            design. This filler text is a short paragraph that contains all the
+            letters of the alphabet. The characters are spread out evenly so
+            that the reader's attention is focused on the layout of the text
+            instead of its content.
+          </small>
         </div>
       </Modal.Body>
       <Modal.Footer className="bg-light">
@@ -35,6 +42,7 @@ export default function ProductModel({
           className="btn btn-success mt-2"
           style={{ textSize: "20px" }}
           onClick={() => handleCart(selectedProduct)}
+          disabled={selectedProduct.stock < 1}
         >
           <FaCartPlus />
           Add To Cart

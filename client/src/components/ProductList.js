@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 import Model from "./ProductModel";
-import { addToCart } from "../actions";
+import { addToCart, getAllProducts } from "../actions";
 
 const ProductList = ({ products }) => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  // const [desc, setDesc] = useState(null);
 
   const handleCart = (val) => {
     addToCart(val)
@@ -15,6 +18,7 @@ const ProductList = ({ products }) => {
         if (res && res.data) {
           toast(res.data, { type: "success" });
           setOpen(false);
+          dispatch(getAllProducts());
         } else {
           toast("something went wrong!", { type: "error" });
           setOpen(false);
@@ -28,6 +32,14 @@ const ProductList = ({ products }) => {
         setOpen(false);
       });
   };
+
+  // const handleDescription = (index) => {
+  //   if (index === desc) {
+  //     setDesc(null);
+  //   } else {
+  //     setDesc(index);
+  //   }
+  // };
 
   const handleModal = () => setOpen(!open);
 
@@ -45,24 +57,29 @@ const ProductList = ({ products }) => {
         {products?.map((product, index) => {
           return (
             <div key={index} className="col-md-3 col-sm-6 col-6 my-3">
-              <div className="card p-md-3 p-sm-2 p-2 bg-light h-100">
-                <img
-                  className="card-img-top"
-                  src={product.image}
-                  onClick={() => handleProductSelection(product)}
-                  alt="Card"
-                />
+              <div
+                className="card p-md-3 p-sm-2 p-2 bg-light h-100"
+                onClick={() => handleProductSelection(product)}
+              >
+                <img className="card-img-top" src={product.image} alt="Card" />
                 <div className="card-body text-center px-0">
                   <h4 className="card-title"> {product.productName} </h4>
                   <p className="card-text">
                     <strong>${product.price}</strong>
                   </p>
                   <p> stock {product.stock}</p>
+                  <p
+                    className="text-primary"
+                    // onClick={() => handleDescription(index)}
+                  >
+                    {/*{index === desc ? "Show Less" : "About Product"}*/}
+                  </p>
                   <div className="">
                     <button
                       className="btn btn-success mt-2"
                       style={{ textSize: "20px" }}
                       onClick={() => handleCart(product)}
+                      disabled={product.stock < 1}
                     >
                       <FaCartPlus />
                       Add To Cart

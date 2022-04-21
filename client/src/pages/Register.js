@@ -16,28 +16,35 @@ const Register = () => {
     cpassword: "",
   });
 
+  const [validation, setValidation] = useState(false);
+
   const history = useHistory();
   const dispatch = useDispatch();
   toast.configure();
 
   const handleChange = (e) => {
+    setValidation(false);
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    userRegister(newUser)
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        dispatch(getUser(res.data.token));
-        toast("registration successfully!", { type: "success" });
-        setTimeout(() => {
-          history.push("/");
-        }, 500);
-      })
-      .catch((err) => {
-        toast(err.response?.data?.message, { type: "error" });
-      });
+    if (newUser?.password === newUser?.cpassword) {
+      userRegister(newUser)
+        .then((res) => {
+          // localStorage.setItem("token", res.data.token);
+          // dispatch(getUser(res.data.token));
+          toast("registration successfully!", { type: "success" });
+          setTimeout(() => {
+            history.push("/login");
+          }, 500);
+        })
+        .catch((err) => {
+          toast(err.response?.data, { type: "error" });
+        });
+    } else {
+      setValidation(true);
+    }
   };
 
   return (
@@ -97,7 +104,11 @@ const Register = () => {
             <Button className="btn btn-success my-2" type="submit">
               Sign up
             </Button>
-            <br />
+            {validation ? (
+              <p className="text-danger">Passwords do not match!!</p>
+            ) : (
+              <br />
+            )}
             <Link to="/login" style={{ textDecoration: "none", color: "blue" }}>
               <IoLogIn />
               Login
