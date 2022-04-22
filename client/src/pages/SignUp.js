@@ -47,7 +47,9 @@ const SignUp = () => {
 
   return (
     <div className="register-form bg-light border border-warning shadow">
-      <h4 className="text-center text-decoration-underline text-uppercase">Sign up</h4>
+      <h4 className="text-center text-decoration-underline text-uppercase">
+        Sign up
+      </h4>
       <div>
         <form onSubmit={(e) => handleSubmit(e)}>
           <table>
@@ -107,7 +109,14 @@ const SignUp = () => {
             ) : (
               <br />
             )}
-            <Link to="/login" style={{ textDecoration: "none", color: "#ffc720" , fontWeight: "bold" }}>
+            <Link
+              to="/login"
+              style={{
+                textDecoration: "none",
+                color: "#ffc720",
+                fontWeight: "bold",
+              }}
+            >
               <IoLogIn />
               Login
             </Link>

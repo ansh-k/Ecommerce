@@ -37,7 +37,7 @@ const getOrder = (state, action) => ({
 //user
 const getUserInfo = (state, action) => ({
   ...state,
-  userData: action.userData,
+  userData: action.payload,
   isLoggedIn: true,
 });
 
