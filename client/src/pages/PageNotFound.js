@@ -1,11 +1,21 @@
 import React from "react";
 
-const PageNotFound =()=>{
-    return(
-        <div className="container text-center my-2 p-2">
-            <h3>ERROR 404! page not found</h3>  
+const PageNotFound = () => (
+  <div class="d-flex flex-row align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-12 text-center">
+          <span class="display-1 d-block">404</span>
+          <div class="mb-4 lead">
+            The page you are looking for was not found.
+          </div>
+          <a href="/" class="btn btn-link">
+            Back to Home
+          </a>
         </div>
-    )
-}
+      </div>
+    </div>
+  </div>
+);
 
 export default PageNotFound;
