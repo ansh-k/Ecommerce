@@ -14,7 +14,6 @@ import Order from "./pages/Order";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import { getUser } from "./actions";
-import PageNotFound from "./pages/PageNotFound";
 import "./App.css";
 
 if (typeof window !== "undefined") {

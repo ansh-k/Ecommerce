@@ -3,7 +3,7 @@ import { FaCartPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 
-import ProductModal from "./ProductModel";
+import ProductModal from "./ProductModal";
 import { addToCart, getProductsList } from "../actions";
 
 const ProductList = ({ products }) => {

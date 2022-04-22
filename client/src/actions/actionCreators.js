@@ -40,7 +40,7 @@ export const loginFailure = (error) => {
 export const getProductDetails = (result) => {
   return {
     type: GET_PRODUCTS,
-    Products: payload
+    Products: result
   }
 }
 
