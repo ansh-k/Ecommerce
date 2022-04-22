@@ -1,14 +1,12 @@
 const products = require("../mockData/products.json");
-const carts = require("../mockData/carts.json");
+const jwt = require("jsonwebtoken");
 
 exports.getProducts = async (req, res) => {
-  products.map((item) => {
-    const product = carts.find(({ product_id }) => product_id === item.id);
-    if (product && product.product_id === item.id) {
-      if (item.stock < product.quantity) {
-        item.stock = item.stock - product.quantity;
-      }
-    }
+  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+  const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "3h" });
+  res.cookie("jwtoken", token, {
+    expiresIn: "1d",
+    httpOnly: true,
   });
   res.status(200);
   res.send(products);

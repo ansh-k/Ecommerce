@@ -9,7 +9,11 @@ exports.login = (req, res) => {
   );
   if (user) {
     let jwtSecretKey = process.env.JWT_SECRET_KEY;
-    const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "1d" });
+    const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "3h" });
+    res.cookie("jwtoken", token, {
+      expiresIn: "1d",
+      httpOnly: true,
+    });
     res.status(201);
     res.send({ username: user.name, email: user.email, token: token });
   } else {
@@ -36,12 +40,12 @@ exports.register = async (req, res) => {
           });
 
           const response = await util.setUser(users);
-          let jwtSecretKey = process.env.JWT_SECRET_KEY;
-          const token = jwt.sign({ name, email, password }, jwtSecretKey, {
-            expiresIn: "1d",
-          });
+          // let jwtSecretKey = process.env.JWT_SECRET_KEY;
+          // const token = jwt.sign({ name, email, password }, jwtSecretKey, {
+          //   expiresIn: "1d",
+          // });
           res.status(200);
-          res.send({ token: token, message: response });
+          res.send({ message: response });
           // res.status(200).send(response)
         } else {
           res.status(401).send("password did not matched!");
@@ -63,6 +67,10 @@ exports.getUser = (req, res) => {
     try {
       const user = jwt.verify(token, jwtSecretKey);
       const userData = users.find((item) => item.email === user.email);
+      res.cookie("jwtoken", token, {
+        expiresIn: "3h",
+        httpOnly: true,
+      });
       res.status(200);
       res.send({
         id: userData._id,
