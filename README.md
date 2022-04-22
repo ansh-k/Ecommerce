@@ -3,15 +3,6 @@
 ## Application Setup
 - Clone Repo : https://github.com/ansh-k/Ecommerce.git
 
-# Packages and Technology used:
--  React: Frontend app
--  Redux: state management tool
--  axios: Api integration
--  Node JS/Express JS: Backend
--  JWT-webtoken (for user authenticate user we provided token with 3 hours expiration)
--  cookie: set cookie session
--  Local Storage
-
 # Frontend
 1. open a terminal and go to 'client' directory `cd client`
 2. npm install (for installing package dependency)
@@ -21,6 +12,15 @@
 1. open a terminal and go to 'server' directory `cd server`
 2. npm install (for setup backend dependency)
 3. npm start (for starting development server)
+
+# Packages and Technology used:
+-  React: Frontend app
+-  Redux: state management tool
+-  axios: Api integration
+-  Node JS/Express JS: Backend
+-  JWT-webtoken (for user authenticate user we provided token with 3 hours expiration)
+-  cookie: set cookie session
+-  Local Storage
 
 # Feature 
   - registration

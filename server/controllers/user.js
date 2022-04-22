@@ -4,7 +4,7 @@ const { keys } = require("../config");
 
 var users = userList.users;
 
-exports.login = (req, res) => {
+exports.userLogin = (req, res) => {
   const user = users.find(
     (item) =>
       item.email === req.body.email && item.password === req.body.password
@@ -24,7 +24,7 @@ exports.login = (req, res) => {
   }
 };
 
-exports.register = async (req, res) => {
+exports.signUp = async (req, res) => {
   const { name, email, password, cpassword } = req.body;
   try {
     if (email.includes("@")) {
@@ -40,15 +40,8 @@ exports.register = async (req, res) => {
             email: email,
             password: password,
           });
-
-          // const response = await util.setUser(users);
-          // let jwtSecretKey = keys.JWT_SECRET_KEY;
-          // const token = jwt.sign({ name, email, password }, jwtSecretKey, {
-          //   expiresIn: "1d",
-          // });
           res.status(200);
           res.send({ message: "updated successfully" });
-          // res.status(200).send(response)
         } else {
           res.status(401).send("password did not matched!");
         }

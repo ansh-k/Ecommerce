@@ -8,7 +8,7 @@ var carts = cartList.carts;
 var products = productList.products;
 var orders = orderList.orders;
 
-exports.addToCart = async (req, res) => {
+exports.addToBag = async (req, res) => {
   let jwtSecretKey = keys.JWT_SECRET_KEY;
   const token = jwt.sign(req.params, jwtSecretKey, { expiresIn: "3h" });
   const { id } = req.params;
@@ -59,7 +59,7 @@ exports.addToCart = async (req, res) => {
   }
 };
 
-exports.getCartList = async (req, res) => {
+exports.getBagList = async (req, res) => {
   let jwtSecretKey = keys.JWT_SECRET_KEY;
   const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "3h" });
   let cartlist = [];
@@ -84,7 +84,7 @@ exports.getCartList = async (req, res) => {
   }
 };
 
-exports.updateCart = async (req, res) => {
+exports.updateBag = async (req, res) => {
   let jwtSecretKey = keys.JWT_SECRET_KEY;
   const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "3h" });
   const { id } = req.params;
@@ -134,7 +134,7 @@ exports.updateCart = async (req, res) => {
   }
 };
 
-exports.removeCart = async (req, res) => {
+exports.removeBag = async (req, res) => {
   let jwtSecretKey = keys.JWT_SECRET_KEY;
   const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "3h" });
   const { id } = req.body;
