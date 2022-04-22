@@ -62,11 +62,11 @@ const Cart = () => {
 
   return (
     <div>
-      <div className="container my-2" style={{ marginTop: "100px" }}>
-        <div style={{ display: "flex" }}>
+      <div className="container my-2 me-0" style={{ marginTop: "100px" }}>
+        <div className=" cart-sec" style={{ display: "flex" }}>
           <div style={{ width: "100%" }}>
             {cartList.length > 0 && (
-              <h4 style={{ marginTop: "100px" }}>
+              <h4 className="text-decoration-underline" style={{ marginTop: "24px" }}>
                 {" "}
                 My Cart <FaShoppingCart />
               </h4>
@@ -79,16 +79,16 @@ const Cart = () => {
                   handleModal={handleModal}
                 />
                 <div className="col-md-6 col-sm-12 col-12  cart-product">
-                  <div className="container bg-light product-table p-0">
+                  <div className="container product-table p-0">
                     <div
                       className="row align-items-stretch"
                       style={{ placeContent: "center" }}
                     >
                       {cartList.map((val, index) => (
                         <div key={index} className="col-md-6 col-6 h-100">
-                          <div className="card my-3 p-2 bg-light">
+                          <div className="card my-3 p-0 border-warning">
                             <img
-                              className="card-img-top"
+                              className="card-img-top border-bottom"
                               src={val.image}
                               height={100}
                               width={50}
@@ -99,7 +99,7 @@ const Cart = () => {
                                 {" "}
                                 {val.productName}{" "}
                               </h4>
-                              <p className="card-text">
+                              <p className="card-text mb-0">
                                 <strong>${val.price}</strong>
                               </p>
                               <div className="">
@@ -114,7 +114,7 @@ const Cart = () => {
                                   >
                                     -
                                   </button>
-                                  <p className="p-3"> {val?.quantity}</p>
+                                  <p className="px-3 py-2 mb-0"> {val?.quantity}</p>
                                   <button
                                     className="btn btn-primary"
                                     disabled={val.stock <= val?.quantity}

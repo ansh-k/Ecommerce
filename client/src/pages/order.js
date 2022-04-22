@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
+import { FaBox, FaBoxes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getAllOrders } from "../actions";
@@ -13,12 +14,12 @@ const Order = () => {
   }, [dispatch]);
 
   return (
-    <div className="col-md-6 offset-md-3 col-sm-12 col-12 my-3 billing">
-      <h4 style={{ marginTop: "100px", marginBottom: "23px" }}> My Orders</h4>
+    <div className="col-md-8 offset-md-3 col-sm-12 col-12 my-3 billing">
+      <h4 className="my-4"><span className="text-decoration-underline me-1">My Orders</span> <FaBoxes /> </h4>
       <div className="product-table">
         <Table striped bordered hover variant="light">
           <thead>
-            <tr>
+            <tr className="border-warning">
               <th scope="col"> No.</th>
               <th scope="col"></th>
               <th scope="col">Product</th>
@@ -27,10 +28,10 @@ const Order = () => {
               <th scope="col">Date</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="border-warning">
             {orderList &&
               orderList?.map((item, i) => (
-                <tr key={i}>
+                <tr key={i} className="border-warning">
                   <td>{i + 1}</td>
                   <td>
                     <img

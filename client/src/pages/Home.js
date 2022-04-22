@@ -12,7 +12,7 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div className="container" style={{ marginTop: "100px" }}>
+    <div className="container" style={{ marginTop: "0", maxWidth: "100%" }}>
       <ProductList products={products} />
     </div>
   );

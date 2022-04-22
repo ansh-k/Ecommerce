@@ -87,6 +87,26 @@ border-radius: 10px;
   border: 1px solid #0d6efd;
   height: 28px;
 }
+
+.logo-icon {
+  height: 30px;
+  width: 30px;
+}
+.modal-body{
+  background-color: white !important;
+}
+.main-nav{
+  width: 220px;
+  
+}
+.nav-link.active {
+  font-weight: bold;
+  text-decoration: underline !important;
+}
+.cart-sec {
+  padding-left: 110px !important;
+  max-width: 100% !important;
+}
 @media (max-width:1024px) {
   .card-img-top {
     height: 100px;
@@ -94,8 +114,10 @@ border-radius: 10px;
 }
 
 .card-img-top {
+  width: auto !important;
+  background-color: #fff;
   height: 165px;
-  object-fit: contain;
+  object-fit: cover !important;
 }
 
 .cart-product .product-table {
