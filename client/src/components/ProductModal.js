@@ -2,7 +2,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { FaCartPlus } from "react-icons/fa";
 
-export default function ProductModel({
+export default function ProductModal({
   handleModal,
   open,
   selectedProduct,
@@ -39,7 +39,7 @@ export default function ProductModel({
       </Modal.Body>
       <Modal.Footer className="bg-light">
         <button
-          className="btn btn-success mt-2"
+          className="btn btn-warning mt-2"
           style={{ textSize: "20px" }}
           onClick={() => handleCart(selectedProduct)}
           disabled={selectedProduct.stock < 1}

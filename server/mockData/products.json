@@ -33,5 +33,61 @@
     "price": 159,
     "image": "https://sslimages.shoppersstop.com/sys-master/images/h37/h04/27074115829790/S22SFWSLPF43152_BEIGE.jpg_230Wx334H",
     "stock": 6
+  },
+  {
+    "id": 3,
+    "productName": "Printed Rayon Comfort",
+    "price": 49,
+    "image": "https://sslimages.shoppersstop.com/sys-master/images/hd7/haa/26440149663774/A21INFUSE26_BROWN.jpg_230Wx334H",
+    "stock": 5
+  },
+  {
+    "id": 4,
+    "productName": "Stripes Cotton Slim",
+    "price": 190,
+    "image": "https://sslimages.shoppersstop.com/sys-master/images/hf4/h34/27128255152158/S22MSH01BB308PI_PINK.jpg_230Wx334H",
+    "stock": 4
+  },
+  {
+    "id": 5,
+    "productName": "Printed Cotton Jersey",
+    "price": 35,
+    "image": "https://sslimages.shoppersstop.com/sys-master/images/ha4/hde/26912061718558/AW21IPT017_MUTED_CORAL.jpg_1088Wx1632H",
+    "stock": 6
+  },
+  {
+    "id": 3,
+    "productName": "Mens Festive Wear Kurta",
+    "price": 149,
+    "image": "https://sslimages.shoppersstop.com/sys-master/images/hb7/hba/27039108399134/SS22LKSCHIFFGWH_WHITE.jpg_1088Wx1632H",
+    "stock": 5
+  },
+  {
+    "id": 4,
+    "productName": "Solid Cotton Slim Mens Trousers",
+    "price": 190,
+    "image": "https://sslimages.shoppersstop.com/sys-master/images/h01/h08/27298123481118/S22TRPASTO1_BLUE.jpg_230Wx334H",
+    "stock": 4
+  },
+  {
+    "id": 5,
+    "productName": "Mens T-Shirt",
+    "price": 55,
+    "image": "https://sslimages.shoppersstop.com/sys-master/images/hf4/h59/27081674424350/S22THTSP2AMK180_RED.jpg_1088Wx1632H",
+    "stock": 6
+  },
+  {
+    "id": 4,
+    "productName": "Solid Cotton Shirt",
+    "price": 210,
+    "image": "https://sslimages.shoppersstop.com/sys-master/root/h84/h96/27236614176798/web_men_shorts-%26-bermudas_ss22-trends_20220314.jpg",
+    "stock": 4
+  },
+  {
+    "id": 5,
+    "productName": "Mens Blacks-Shirt",
+    "price": 255,
+    "image": "https://sslimages.shoppersstop.com/sys-master/root/hd7/h95/27236614111262/web_men_black-%26-green_ss22-trends_20220314.jpg",
+    "stock": 6
   }
 ]

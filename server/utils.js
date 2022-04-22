@@ -25,7 +25,7 @@ exports.setCart = (carts) => {
         if (err) {
           reject(err);
         } else {
-          resolve("product added into cart");
+          resolve("product added into bag");
         }
       }
     );
@@ -41,7 +41,7 @@ exports.removeProduct = (fillCarts) => {
         if (err) {
           reject(err);
         } else {
-          resolve("product has been removed from the cart");
+          resolve("product has been removed from the bag");
         }
       }
     );

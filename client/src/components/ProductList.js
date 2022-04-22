@@ -3,14 +3,13 @@ import { FaCartPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 
-import Model from "./ProductModel";
+import ProductModal from "./ProductModal";
 import { addToCart, getAllProducts } from "../actions";
 
 const ProductList = ({ products }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  // const [desc, setDesc] = useState(null);
 
   const handleCart = (val) => {
     addToCart(val)
@@ -33,13 +32,6 @@ const ProductList = ({ products }) => {
       });
   };
 
-  // const handleDescription = (index) => {
-  //   if (index === desc) {
-  //     setDesc(null);
-  //   } else {
-  //     setDesc(index);
-  //   }
-  // };
 
   const handleModal = () => setOpen(!open);
 
@@ -76,9 +68,7 @@ const ProductList = ({ products }) => {
                       <p className="mb-0"> stock {product.stock}</p>
                       <p
                         className="text-primary"
-                        // onClick={() => handleDescription(index)}
                       >
-                        {/*{index === desc ? "Show Less" : "About Product"}*/}
                       </p>
                       <div className="">
                         <button
@@ -88,7 +78,7 @@ const ProductList = ({ products }) => {
                           disabled={product.stock < 1}
                         >
                           <FaCartPlus />
-                          <span className="ms-2 ">Add To Cart</span>
+                          <span className="ms-2 ">ADD TO BAG</span>
                         </button>
                       </div>
                     </div>
@@ -100,7 +90,7 @@ const ProductList = ({ products }) => {
         </div>{" "}
       </div>
       {open && (
-        <Model
+        <ProductModal
           handleModal={handleModal}
           open={open}
           handleCart={handleCart}

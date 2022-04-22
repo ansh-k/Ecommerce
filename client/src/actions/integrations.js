@@ -1,7 +1,8 @@
 import axios from "axios";
 import { API_BASE_URL } from "../config/config";
 
-//cart
+// ALl Carts actions start
+//cart code below
 
 export const getCarts = () => {
   const token = localStorage.getItem("token");
@@ -15,6 +16,8 @@ export const getCarts = () => {
   });
 };
 
+// add to Cart code below 
+
 export const addToCart = (data) => {
   const token = localStorage.getItem("token");
   return axios({
@@ -26,6 +29,8 @@ export const addToCart = (data) => {
     },
   });
 };
+
+// remove cart code below
 
 export const removeCart = (id) => {
   const token = localStorage.getItem("token");
@@ -40,6 +45,8 @@ export const removeCart = (id) => {
   });
 };
 
+//  Update Cart code below
+
 export const updateCart = ({ id, quantity }) => {
   const token = localStorage.getItem("token");
   return axios({
@@ -53,7 +60,8 @@ export const updateCart = ({ id, quantity }) => {
   });
 };
 
-//product
+// ALl Carts actions end
+//product code below
 
 export const getProducts = () => {
   const token = localStorage.getItem("token");
@@ -68,7 +76,7 @@ export const getProducts = () => {
   });
 };
 
-//orders
+//orders code below
 
 export const getOrders = () => {
   const token = localStorage.getItem("token");
@@ -83,7 +91,7 @@ export const getOrders = () => {
   });
 };
 
-//user
+//user code below
 
 export const userLogin = (user) => {
   return axios({
@@ -95,6 +103,8 @@ export const userLogin = (user) => {
     data: user,
   });
 };
+
+// user register code below
 
 export const userRegister = (newUser) => {
   return axios({

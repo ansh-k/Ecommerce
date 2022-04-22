@@ -1,12 +1,12 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { FaUser } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { removeCart, getAllOrders } from "../actions";
 
-function CartModel({ open, handleModal, total, user }) {
+function CartModel({ modal, handleModal, total, user }) {
   const dispatch = useDispatch();
   toast.configure();
   const history = useHistory();
@@ -20,7 +20,7 @@ function CartModel({ open, handleModal, total, user }) {
   };
 
   return (
-    <Modal show={open} onHide={handleModal}>
+    <Modal show={modal} onHide={handleModal}>
       <Modal.Header className="bg-warning text-light" closeButton>
         <Modal.Title>
           {" "}
@@ -30,11 +30,11 @@ function CartModel({ open, handleModal, total, user }) {
       <Modal.Body>
         <div className="modal-body bg-white">
           <div className="body-name">
-            <FaUser /> <strong>Name: {user.username} </strong>
+            <FaUserCircle /> <strong>Name: {user?.username} </strong>
           </div>
 
           <div className="body-price">
-            <strong>Amount: ${total} </strong>
+            <strong>Order Total: ${total} </strong>
           </div>
         </div>
       </Modal.Body>
@@ -44,7 +44,7 @@ function CartModel({ open, handleModal, total, user }) {
           style={{ textSize: "20px" }}
           onClick={orderPlaced}
         >
-          Place your Order
+          Continue
         </button>
       </Modal.Footer>
     </Modal>

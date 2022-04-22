@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
-import { FaBox, FaBoxes } from "react-icons/fa";
+import { FaBoxes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getAllOrders } from "../actions";
@@ -21,10 +21,10 @@ const Order = () => {
           <thead>
             <tr className="border-warning">
               <th scope="col"> No.</th>
-              <th scope="col"></th>
+              <th scope="col">Img</th>
               <th scope="col">Product</th>
-              <th scope="col-2">Quantity x Price</th>
-              <th scope="col">Total Price</th>
+              <th scope="col-2">Qty * Rate</th>
+              <th scope="col">Total</th>
               <th scope="col">Date</th>
             </tr>
           </thead>

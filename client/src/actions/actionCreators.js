@@ -30,24 +30,24 @@ export const successLogin = (result) => {
   }
 }
 
-export const failureLogin = (error) => {
+export const failureLogin = () => {
   return {
       type: FAILURE_LOGIN,
       user: []
   }
 }
 
-export const successGetProducts = (result) => {
+export const successGetProducts = (payload) => {
   return {
     type: GET_PRODUCTS,
-    Products: result
+    Products: payload
   }
 }
 
-export const successGetUser = (result) => {
+export const successGetUser = (payload) => {
   return {
     type: GET_USER,
-    userinfo: result
+    userData: payload
   }
 }
 
@@ -57,10 +57,10 @@ export const clearUser = () => {
   }
 }
 
-export const getOrder = (result) => {
+export const getOrder = (payload) => {
   return {
     type: GET_ORDER,
-    orders: result
+    orders: payload
   }
 }
 

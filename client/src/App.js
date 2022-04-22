@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { Route, Switch } from "react-router-dom";
+import { Switch ,Route } from "react-router-dom";
 import { toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
 
-import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
 import Register from "./pages/Register";
-import PageNotFound from "./pages/PageNotFound";
-import Cart from "./pages/Cart";
+import MyCart from "./pages/MyCart";
 import Order from "./pages/order";
-import "./App.css";
-import Header from "./components/Header";
 import { getUser } from "./actions";
+import Header from "./components/Header";
+import PageNotFound from "./pages/PageNotFound";
+import "./App.css";
 
 if (typeof window !== "undefined") {
   injectStyle();
@@ -50,7 +50,7 @@ function App() {
         </Route>
         <Route exact path="/cart">
           {isLoggedIn ? (
-            <Cart />
+            <MyCart />
           ) : (
             <div className="login">
               {" "}

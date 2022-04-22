@@ -12,18 +12,6 @@ export const getAllCarts = () => (dispatch) => {
     });
 };
 
-// export const getLogin = () => {
-//   return function (dispatch) {
-//     Api.Login()
-//       .then((result) => {
-//         dispatch(actions.successLogin(result.data));
-//       })
-//       .catch((error) => {
-//         dispatch(actions.failureLogin(error));
-//       });
-//   };
-// };
-
 export const getAllProducts = () => {
   return function (dispatch) {
     getProducts()
