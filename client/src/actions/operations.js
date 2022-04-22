@@ -1,64 +1,116 @@
-import * as actions from "./actionCreators";
+import axios from "axios";
 import { toast } from "react-toastify";
-import { getCarts, getProducts, getUserApi, getOrders } from "./integrations";
+
+import * as actions from "./actionCreators";
+import { API_BASE_URL } from "../config/config";
+
+const baseURL = API_BASE_URL;
+
+//cart
 
 export const getAllCarts = () => (dispatch) => {
-  getCarts()
-    .then((result) => {
-      dispatch(actions.successGetCarts(result.data));
+  return axios
+    .get(`${baseURL}/carts`)
+    .then((res) => {
+      dispatch(actions.successGetCarts(res?.data));
     })
     .catch((error) => {
-      toast("something went wrong!", { type: "error" });
+      toast("Fetching cart Failed!", { type: "error" });
     });
 };
 
-// export const getLogin = () => {
-//   return function (dispatch) {
-//     Api.Login()
-//       .then((result) => {
-//         dispatch(actions.successLogin(result.data));
-//       })
-//       .catch((error) => {
-//         dispatch(actions.failureLogin(error));
-//       });
-//   };
-// };
-
-export const getAllProducts = () => {
-  return function (dispatch) {
-    getProducts()
-      .then((result) => {
-        dispatch(actions.successGetProducts(result.data));
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  };
+export const addToCart = (data) => (dispatch) => {
+  return axios
+    .post(`${baseURL}/cart/${data.id}`)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      toast("Product not added!", { type: "error" });
+    });
 };
 
-export const getAllOrders = () => {
-  return function (dispatch) {
-    getOrders()
-      .then((result) => {
-        dispatch(actions.getOrder(result.data));
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  };
+export const removeCart = (id) => (dispatch) => {
+  return axios
+    .delete(`${baseURL}/cart`, id)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      toast("Remove Product Failed!", { type: "error" });
+    });
 };
 
-export const getUser = (token) => {
-  return function (dispatch) {
-    getUserApi(token)
-      .then((result) => {
-        if (result && result.data)
-          dispatch(actions.successGetUser(result.data));
-        else {
-        }
+export const updateCart =
+  ({ id, quantity }) =>
+  (dispatch) => {
+    return axios
+      .patch(`${baseURL}/cart/${id}`, { quantity })
+      .then((res) => {
+        return res;
       })
       .catch((error) => {
-        console.log(error);
+        toast("Product update Failed!", { type: "error" });
       });
   };
+
+//product
+
+export const getProductsList = () => (dispatch) => {
+  return axios
+    .get(`${baseURL}/products`)
+    .then((res) => {
+      dispatch(actions.getProductDetails(res?.data));
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
+};
+
+//orders
+
+export const getordersList = () => (dispatch) => {
+  return axios
+    .get(`${baseURL}/orders`)
+    .then((res) => {
+      dispatch(actions.getOrder(res?.data));
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
+};
+
+//user
+
+export const userLogin = (data) => (dispatch) => {
+  return axios
+    .post(`${baseURL}/login`, data)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      toast("User Login Failed!", { type: "error" });
+    });
+};
+
+export const userSignup = (data) => (dispatch) => {
+  return axios
+    .post(`${baseURL}/signup`, data)
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      toast("Registration Failed!", { type: "error" });
+    });
+};
+
+export const getUser = () => (dispatch) => {
+  return axios
+    .get(`${baseURL}/user`)
+    .then((res) => {
+      dispatch(actions.getUserInfo(res?.data));
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
 };

@@ -5,7 +5,7 @@ import { FaCartPlus } from "react-icons/fa";
 export default function ProductModel({
   handleModal,
   open,
-  selectedProduct,
+  itemList,
   handleCart,
 }) {
   return (
@@ -13,20 +13,20 @@ export default function ProductModel({
       <Modal.Header className="bg-warning text-light" closeButton>
         <Modal.Title>
           {" "}
-          <strong> {selectedProduct.productName} </strong>{" "}
+          <strong> {itemList.productName} </strong>{" "}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="modal-body">
           <img
             className="modal-img"
-            src={selectedProduct.image}
+            src={itemList.image}
             onClick={() => handleModal}
             alt="Card"
           />
           <div className="mt-4">
-            <strong>Price: ${selectedProduct.price} </strong>
-            <p> Stock: {selectedProduct.stock} </p>
+            <strong>Price: ${itemList.price} </strong>
+            <p> Stock: {itemList.stock} </p>
           </div>
           <small>
             The lorem ipsum is a placeholder text used in publishing and graphic
@@ -41,8 +41,8 @@ export default function ProductModel({
         <button
           className="btn btn-success mt-2"
           style={{ textSize: "20px" }}
-          onClick={() => handleCart(selectedProduct)}
-          disabled={selectedProduct.stock < 1}
+          onClick={() => handleCart(itemList)}
+          disabled={itemList.stock < 1}
         >
           <FaCartPlus />
           Add To Cart

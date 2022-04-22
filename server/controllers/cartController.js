@@ -1,11 +1,15 @@
-const util = require("../utils");
-const carts = require("../mockData/carts.json");
-const products = require("../mockData/products.json");
-const orders = require("../mockData/order.json");
+var cartList = require("../config");
+var productList = require("../config");
+var orderList = require("../config");
 const jwt = require("jsonwebtoken");
+const { keys } = require("../config");
+
+var carts = cartList.carts;
+var products = productList.products;
+var orders = orderList.orders;
 
 exports.addToCart = async (req, res) => {
-  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+  let jwtSecretKey = keys.JWT_SECRET_KEY;
   const token = jwt.sign(req.params, jwtSecretKey, { expiresIn: "3h" });
   const { id } = req.params;
   const data = products.filter((item) => item.id == id)[0];
@@ -17,8 +21,6 @@ exports.addToCart = async (req, res) => {
   if (data) {
     const fillCarts = carts.filter((item) => item.product_id == id);
     if (fillCarts.length > 0) {
-      // res.status(200);
-      // res.send("product already added to cart");
       carts.forEach((item, index) => {
         if (item.product_id == id) {
           item.quantity = item.quantity + 1;
@@ -38,13 +40,13 @@ exports.addToCart = async (req, res) => {
           user_id: 1,
           quantity: 1,
         });
-        const response = await util.setCart(carts);
+
         res.cookie("jwtoken", token, {
           expiresIn: "1d",
           httpOnly: true,
         });
         res.status(200);
-        res.send(response);
+        res.send("product added into cart");
       } catch (err) {
         res.cookie("jwtoken", token, {
           expiresIn: "1d",
@@ -58,7 +60,7 @@ exports.addToCart = async (req, res) => {
 };
 
 exports.getCartList = async (req, res) => {
-  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+  let jwtSecretKey = keys.JWT_SECRET_KEY;
   const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "3h" });
   let cartlist = [];
   try {
@@ -83,7 +85,7 @@ exports.getCartList = async (req, res) => {
 };
 
 exports.updateCart = async (req, res) => {
-  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+  let jwtSecretKey = keys.JWT_SECRET_KEY;
   const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "3h" });
   const { id } = req.params;
   const { quantity } = req.body;
@@ -100,7 +102,6 @@ exports.updateCart = async (req, res) => {
         carts.splice(index, 1, { ...item, quantity: quantity });
       }
     });
-    await util.setCart(carts);
     let cartlist = [];
     try {
       carts.forEach((item) => {
@@ -134,7 +135,7 @@ exports.updateCart = async (req, res) => {
 };
 
 exports.removeCart = async (req, res) => {
-  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+  let jwtSecretKey = keys.JWT_SECRET_KEY;
   const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "3h" });
   const { id } = req.body;
 
@@ -150,7 +151,6 @@ exports.removeCart = async (req, res) => {
     }
     return [];
   });
-  util.setorderList(orders);
 
   try {
     if (id) {
@@ -159,17 +159,15 @@ exports.removeCart = async (req, res) => {
         expiresIn: "1d",
         httpOnly: true,
       });
-      const response = await util.removeProduct(filterCarts);
       res.status(200);
-      res.send(response);
+      res.send("product has been removed from the cart");
     } else {
       res.cookie("jwtoken", token, {
         expiresIn: "1d",
         httpOnly: true,
       });
-      const response = await util.removeProduct([]);
       res.status(200);
-      res.send(response);
+      res.send("");
     }
   } catch (err) {
     res.status(400);

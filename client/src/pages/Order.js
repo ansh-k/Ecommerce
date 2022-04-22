@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
-import { FaBox, FaBoxes } from "react-icons/fa";
+import { FaBoxes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getAllOrders } from "../actions";
+import { getordersList } from "../actions";
 
 const Order = () => {
   const dispatch = useDispatch();
   const orderList = useSelector((state) => state?.data?.orders);
 
   useEffect(() => {
-    dispatch(getAllOrders());
+    dispatch(getordersList());
   }, [dispatch]);
 
   return (

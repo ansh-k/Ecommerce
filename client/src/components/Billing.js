@@ -1,6 +1,6 @@
 import { Table } from "react-bootstrap";
 
-const Invoice = ({ cartList, subTotal, handleModal }) => (
+const Billing = ({ cartList, subTotal, handleModal }) => (
   <div className="col-md-6 col-sm-12 col-12 my-3 billing">
     <div className="product-table">
       <Table bordered hover>
@@ -32,4 +32,4 @@ const Invoice = ({ cartList, subTotal, handleModal }) => (
   </div>
 )
 
-export default Invoice;
+export default Billing;

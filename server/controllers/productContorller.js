@@ -1,8 +1,11 @@
-const products = require("../mockData/products.json");
+var productList = require("../config");
 const jwt = require("jsonwebtoken");
+const { keys } = require("../config");
+
+var products = productList.products;
 
 exports.getProducts = async (req, res) => {
-  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+  let jwtSecretKey = keys.JWT_SECRET_KEY;
   const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "3h" });
   res.cookie("jwtoken", token, {
     expiresIn: "1d",

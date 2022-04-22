@@ -6,6 +6,9 @@ import App from "./App";
 import store from "./config/store";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { setupAxiosInterceptors } from "./config/axios";
+
+setupAxiosInterceptors();
 
 ReactDOM.render(
   <React.StrictMode>

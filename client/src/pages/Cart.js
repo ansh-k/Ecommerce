@@ -5,7 +5,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import CartModel from "../components/CartModel";
-import Invoice from "../components/Invoice";
+import Billing from "../components/Billing";
 import { getAllCarts } from "../actions";
 import { removeCart, updateCart } from "../actions";
 
@@ -33,7 +33,7 @@ const Cart = () => {
 
   const handleRemoveCart = (product) => {
     console.log(product.id);
-    removeCart(product.id)
+    dispatch(removeCart(product.id))
       .then((res) => {
         setTimeout(() => {
           dispatch(getAllCarts());
@@ -45,7 +45,7 @@ const Cart = () => {
   };
 
   const handleQuantityInc = (val) => {
-    updateCart({ id: val.id, quantity: val.quantity + 1 }).then(() => {
+    dispatch(updateCart({ id: val.id, quantity: val.quantity + 1 })).then(() => {
       setTimeout(() => {
         dispatch(getAllCarts());
       }, 500);
@@ -53,7 +53,7 @@ const Cart = () => {
   };
 
   const handleQuantityDec = (val) => {
-    updateCart({ id: val.id, quantity: val.quantity - 1 }).then(() => {
+    dispatch(updateCart({ id: val.id, quantity: val.quantity - 1 })).then(() => {
       setTimeout(() => {
         dispatch(getAllCarts());
       }, 500);
@@ -66,14 +66,17 @@ const Cart = () => {
         <div className=" cart-sec" style={{ display: "flex" }}>
           <div style={{ width: "100%" }}>
             {cartList.length > 0 && (
-              <h4 className="text-decoration-underline" style={{ marginTop: "24px" }}>
+              <h4
+                className="text-decoration-underline"
+                style={{ marginTop: "24px" }}
+              >
                 {" "}
                 My Cart <FaShoppingCart />
               </h4>
             )}
             {cartList.length > 0 ? (
               <div className="row d-md-flex  d-sm-block d-block my-2">
-                <Invoice
+                <Billing
                   cartList={cartList}
                   subTotal={subTotal}
                   handleModal={handleModal}
@@ -114,7 +117,10 @@ const Cart = () => {
                                   >
                                     -
                                   </button>
-                                  <p className="px-3 py-2 mb-0"> {val?.quantity}</p>
+                                  <p className="px-3 py-2 mb-0">
+                                    {" "}
+                                    {val?.quantity}
+                                  </p>
                                   <button
                                     className="btn btn-primary"
                                     disabled={val.stock <= val?.quantity}

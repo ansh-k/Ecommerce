@@ -1,6 +1,8 @@
-const util = require("../utils");
-const users = require("../mockData/users.json");
+const userList = require("../config");
 const jwt = require("jsonwebtoken");
+const { keys } = require("../config");
+
+var users = userList.users;
 
 exports.login = (req, res) => {
   const user = users.find(
@@ -8,7 +10,7 @@ exports.login = (req, res) => {
       item.email === req.body.email && item.password === req.body.password
   );
   if (user) {
-    let jwtSecretKey = process.env.JWT_SECRET_KEY;
+    let jwtSecretKey = keys.JWT_SECRET_KEY;
     const token = jwt.sign(req.body, jwtSecretKey, { expiresIn: "3h" });
     res.cookie("jwtoken", token, {
       expiresIn: "1d",
@@ -39,13 +41,13 @@ exports.register = async (req, res) => {
             password: password,
           });
 
-          const response = await util.setUser(users);
-          // let jwtSecretKey = process.env.JWT_SECRET_KEY;
+          // const response = await util.setUser(users);
+          // let jwtSecretKey = keys.JWT_SECRET_KEY;
           // const token = jwt.sign({ name, email, password }, jwtSecretKey, {
           //   expiresIn: "1d",
           // });
           res.status(200);
-          res.send({ message: response });
+          res.send({ message: "updated successfully" });
           // res.status(200).send(response)
         } else {
           res.status(401).send("password did not matched!");
@@ -61,7 +63,7 @@ exports.register = async (req, res) => {
 
 exports.getUser = (req, res) => {
   const authorization = req.headers.authorization;
-  const jwtSecretKey = process.env.JWT_SECRET_KEY;
+  const jwtSecretKey = keys.JWT_SECRET_KEY;
   const token = authorization.split(" ")[1];
   if (token) {
     try {

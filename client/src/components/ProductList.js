@@ -4,21 +4,20 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 
 import Model from "./ProductModel";
-import { addToCart, getAllProducts } from "../actions";
+import { addToCart, getProductsList } from "../actions";
 
 const ProductList = ({ products }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  // const [desc, setDesc] = useState(null);
+  const [itemList, setItemList] = useState(null);
 
   const handleCart = (val) => {
-    addToCart(val)
+    dispatch(addToCart(val))
       .then((res) => {
         if (res && res.data) {
           toast(res.data, { type: "success" });
           setOpen(false);
-          dispatch(getAllProducts());
+          dispatch(getProductsList());
         } else {
           toast("something went wrong!", { type: "error" });
           setOpen(false);
@@ -33,18 +32,10 @@ const ProductList = ({ products }) => {
       });
   };
 
-  // const handleDescription = (index) => {
-  //   if (index === desc) {
-  //     setDesc(null);
-  //   } else {
-  //     setDesc(index);
-  //   }
-  // };
-
   const handleModal = () => setOpen(!open);
 
   const handleProductSelection = (product) => {
-    setSelectedProduct(product);
+    setItemList(product);
     setOpen(!open);
   };
 
@@ -76,9 +67,7 @@ const ProductList = ({ products }) => {
                       <p className="mb-0"> stock {product.stock}</p>
                       <p
                         className="text-primary"
-                        // onClick={() => handleDescription(index)}
                       >
-                        {/*{index === desc ? "Show Less" : "About Product"}*/}
                       </p>
                       <div className="">
                         <button
@@ -104,7 +93,7 @@ const ProductList = ({ products }) => {
           handleModal={handleModal}
           open={open}
           handleCart={handleCart}
-          selectedProduct={selectedProduct}
+          itemList={itemList}
         />
       )}
     </div>

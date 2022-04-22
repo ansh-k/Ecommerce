@@ -3,12 +3,13 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { IoLogIn } from "react-icons/io5";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
-import { userRegister } from "../actions";
-// import { getUser } from "../actions";
-// import { useDispatch } from "react-redux";
 
-const Register = () => {
+import { userSignup } from "../actions";
+// import { getUser } from "../actions";
+
+const SignUp = () => {
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
@@ -19,7 +20,7 @@ const Register = () => {
   const [validation, setValidation] = useState(false);
 
   const history = useHistory();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   toast.configure();
 
   const handleChange = (e) => {
@@ -30,7 +31,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newUser?.password === newUser?.cpassword) {
-      userRegister(newUser)
+      dispatch(userSignup(newUser))
         .then((res) => {
           // localStorage.setItem("token", res.data.token);
           // dispatch(getUser(res.data.token));
@@ -60,7 +61,7 @@ const Register = () => {
                     type="text"
                     name="name"
                     required
-                    placeholder="User Name"
+                    placeholder="Name"
                     onChange={(e) => handleChange(e)}
                   ></input>
                 </td>
@@ -120,4 +121,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignUp;

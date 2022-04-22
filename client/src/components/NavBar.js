@@ -5,15 +5,15 @@ import { FaBoxes, FaCartPlus, FaHome, FaPlus, FaShoppingCart, FaSignInAlt, FaSig
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
-import { clearUser } from "../actions";
+import { removeUser } from "../actions";
 
-const Header = () => {
+const NavBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
-    dispatch(clearUser());
+    dispatch(removeUser());
     history.push("/login");
   };
   const loginUser = useSelector((state) => state?.data?.userinfo);
@@ -79,7 +79,7 @@ const Header = () => {
               {!isLoggedIn && (
                 <Nav.Link
                   as={Link}
-                  to="/register"
+                  to="/signup"
                   className="text-white px-0 py-2 "
                   style={{ textDecoration: "none" }}
                 >
@@ -116,4 +116,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default NavBar;

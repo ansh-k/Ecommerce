@@ -5,14 +5,14 @@ import { Route, Switch } from "react-router-dom";
 import { toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
 
-import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
+import SignUp from "./pages/SignUp";
 import PageNotFound from "./pages/PageNotFound";
 import Cart from "./pages/Cart";
-import Order from "./pages/order";
+import Order from "./pages/Order";
 import "./App.css";
-import Header from "./components/Header";
+import NavBar from "./components/NavBar";
 import { getUser } from "./actions";
 
 if (typeof window !== "undefined") {
@@ -36,11 +36,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <NavBar />
       <Switch>
         <Route exact path="/">
           {isLoggedIn ? (
-            <Home />
+            <Dashboard />
           ) : (
             <div className="login">
               {" "}
@@ -69,12 +69,10 @@ function App() {
           )}
         </Route>
         <Route path="/login">
-          <div className="login">{!isLoggedIn ? <Login /> : <Home />}</div>
+          <div className="login">{!isLoggedIn ? <Login /> : <Dashboard />}</div>
         </Route>
-        <Route path="/register">
-          <div className="register">
-            {!isLoggedIn ? <Register /> : <Home />}
-          </div>
+        <Route path="/signup">
+          <div className="register">{!isLoggedIn ? <SignUp /> : <Dashboard />}</div>
         </Route>
         <Route path="*">
           <div className="register">

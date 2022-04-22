@@ -1,11 +1,11 @@
 import {
   GET_CARTS,
-  REQUEST_LOGIN,
-  SUCCESS_LOGIN,
-  FAILURE_LOGIN,
+  LOGIN_BEGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
   GET_PRODUCTS,
-  GET_USER,
-  CLEAR_USER,
+  GET_USER_INFO,
+  REMOVE_USER,
   GET_ORDER,
 } from "../constant";
 
@@ -16,44 +16,44 @@ export const successGetCarts = (result) => {
   }
 }
 
-export const requestLogin = () => {
+export const loginBegin = () => {
   return {
-      type: REQUEST_LOGIN,
-      user: []
+      type: LOGIN_BEGIN,
+      payload: []
   }
 }
 
-export const successLogin = (result) => {
+export const loginSuccess = (result) => {
   return {
-      type: SUCCESS_LOGIN,
-      user: result
+      type: LOGIN_SUCCESS,
+      payload: result
   }
 }
 
-export const failureLogin = (error) => {
+export const loginFailure = (error) => {
   return {
-      type: FAILURE_LOGIN,
-      user: []
+      type: LOGIN_FAILURE,
+      payload: []
   }
 }
 
-export const successGetProducts = (result) => {
+export const getProductDetails = (result) => {
   return {
     type: GET_PRODUCTS,
     Products: result
   }
 }
 
-export const successGetUser = (result) => {
+export const getUserInfo = (result) => {
   return {
-    type: GET_USER,
-    userinfo: result
+    type: GET_USER_INFO,
+    payload: result
   }
 }
 
-export const clearUser = () => {
+export const removeUser = () => {
   return {
-    type: CLEAR_USER
+    type: REMOVE_USER
   }
 }
 

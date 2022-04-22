@@ -14,7 +14,7 @@ const requestLoginUser = (state, action) => ({
 
 const successLoginUser = (state, action) => ({
   ...state,
-  user: action.user,
+  user: action.payload,
 });
 
 const failLoginUser = (state, action) => ({
@@ -35,13 +35,13 @@ const getOrder = (state, action) => ({
 });
 
 //user
-const getUser = (state, action) => ({
+const getUserInfo = (state, action) => ({
   ...state,
-  userinfo: action.userinfo,
+  userinfo: action.payload,
   isLoggedIn: true,
 });
 
-const clearUser = (state, action) => ({
+const removeUser = (state, action) => ({
   ...state,
   userinfo: null,
   isLoggedIn: false,
@@ -49,11 +49,11 @@ const clearUser = (state, action) => ({
 
 export const setReducer = {
   [constants.GET_CARTS]: cartReducer,
-  [constants.REQUEST_LOGIN]: requestLoginUser,
-  [constants.SUCCESS_LOGIN]: successLoginUser,
-  [constants.FAILURE_LOGIN]: failLoginUser,
+  [constants.LOGIN_BEGIN]: requestLoginUser,
+  [constants.LOGIN_SUCCESS]: successLoginUser,
+  [constants.LOGIN_FAILURE]: failLoginUser,
   [constants.GET_PRODUCTS]: productReducer,
-  [constants.GET_USER]: getUser,
-  [constants.CLEAR_USER]: clearUser,
+  [constants.GET_USER_INFO]: getUserInfo,
+  [constants.REMOVE_USER]: removeUser,
   [constants.GET_ORDER]: getOrder,
-};
+}; 

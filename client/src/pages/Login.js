@@ -1,10 +1,10 @@
-import Button from "@restart/ui/esm/Button";
 import React, { useState } from "react";
+import Button from "@restart/ui/esm/Button";
 import { useDispatch } from "react-redux";
-import { Link , useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getUser } from "../actions";
-import { userLogin } from "../actions";
+
+import { getUser, userLogin } from "../actions";
 
 const Login = () => {
   const [user, setuser] = useState({ email: "", password: "" });
@@ -12,15 +12,15 @@ const Login = () => {
   const history = useHistory();
   const handleLogin = (e) => {
     e.preventDefault();
-    userLogin(user)
+    dispatch(userLogin(user))
       .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        dispatch(getUser(res.data.token));
+        localStorage.setItem("token", res?.data.token);
+        dispatch(getUser(res?.data?.token));
         toast("login successfully!", { type: "success" });
         history.push("/");
       })
       .catch((err) => {
-        toast(err.response.data, { type: "error" });
+        toast(err?.response.data, { type: "error" });
       });
   };
 
@@ -30,7 +30,12 @@ const Login = () => {
 
   return (
     <div className="login-form bg-light border border-warning">
-      <h4 className="text-center text-decoration-underLine text-uppercase" style={{ textAlign: "center" }}>Login</h4>
+      <h4
+        className="text-center text-decoration-underLine text-uppercase"
+        style={{ textAlign: "center" }}
+      >
+        Login
+      </h4>
       <form onSubmit={(e) => handleLogin(e)}>
         <table>
           <tbody>
@@ -65,8 +70,12 @@ const Login = () => {
             </Button>
           </div>
           <Link
-            to="/register"
-            style={{ textDecoration: "none", color: "#ffc720", fontweight: "bold" }}
+            to="/signup"
+            style={{
+              textDecoration: "none",
+              color: "#ffc720",
+              fontweight: "bold",
+            }}
           >
             Sign up
           </Link>

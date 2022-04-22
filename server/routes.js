@@ -7,7 +7,7 @@ const productContorller = require("./controllers/productContorller");
 const userController = require("./controllers/userController");
 const orderController = require("./controllers/orderController");
 
-app.post("/register", userController.register);
+app.post("/signup", userController.register);
 app.post("/login", userController.login);
 app.get("/user", userController.getUser);
 
