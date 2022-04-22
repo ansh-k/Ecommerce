@@ -3,7 +3,7 @@ import * as constants from "../constant";
 //cart
 const cartReducer = (state, action) => ({
   ...state,
-  cartList: action.CartList,
+  cartItem: action.CartList,
 });
 
 //get-user
@@ -37,13 +37,13 @@ const getOrder = (state, action) => ({
 //user
 const getUserInfo = (state, action) => ({
   ...state,
-  userinfo: action.payload,
+  userData: action.userData,
   isLoggedIn: true,
 });
 
 const removeUser = (state, action) => ({
   ...state,
-  userinfo: null,
+  userData: null,
   isLoggedIn: false,
 });
 

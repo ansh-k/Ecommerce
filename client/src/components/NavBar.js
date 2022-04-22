@@ -1,23 +1,25 @@
-import React from "react";
+import React ,{ useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { FaBoxes, FaCartPlus, FaHome, FaPlus, FaShoppingCart, FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { FaBoxes, FaCartPlus, FaHome, FaPlus, FaShoppingCart, FaSignInAlt, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 import { useHistory } from "react-router";
 
 import { removeUser } from "../actions";
 
 const NavBar = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = useHistory()
+  const [activeTab, setActive] = useState(window.location.pathname);
   const handleLogout = (e) => {
     e.preventDefault();
+    setActive("/login");
     localStorage.removeItem("token");
     dispatch(removeUser());
     history.push("/login");
   };
-  const loginUser = useSelector((state) => state?.data?.userinfo);
-  const isLoggedIn = useSelector((state) => state?.data?.isLoggedIn);
+  const signInUser = useSelector((state) => state?.data?.userData);
+  const isSignIn = useSelector((state) => state?.data?.isLoggedIn);
 
   return (
     <div className="navbar-fixed main-nav bg-warning h-100">
@@ -35,52 +37,56 @@ const NavBar = () => {
             className="justify-content-start text-capitalize"
           >
             <Nav className="flex-column w-100 py-2">
-              {isLoggedIn && (
+              {isSignIn && (
                 <>
-                  <Nav.Link
-                    as={Link}
-                    to="/"
-                    className="text-white px-0 py-2 active"
-                    style={{ textDecoration: "none" }}
-                  >
-                   <FaHome />
-                    <span> home</span> 
+                <Nav.Link className="text-white px-0 py-2">
+                    <div
+                      style={{ textDecoration: "none" }}
+                    >
+                      <FaUserCircle />
+                      <span className="ms-1 ">Hello, {signInUser?.username}{" "}</span>
+                    </div>
                   </Nav.Link>
 
                   <Nav.Link
                     as={Link}
-                    to="/cart"
-                    className="text-white px-0 py-2"
+                    to="/"
+                    onClick={()=> setActive("/")}
+                    className={activeTab === "/" ? "text-white px-0 py-2 active" : "text-white px-0 py-2" }
                     style={{ textDecoration: "none" }}
                   >
-                    <FaShoppingCart /> <span className="ms-1">MyCart{" "}</span>
+                   <FaHome />
+                    <span> Home</span> 
                   </Nav.Link>
 
                   <Nav.Link
                     as={Link}
                     to="/orders"
-                    className="text-white px-0 py-2"
+                    onClick={() => setActive("/orders")}
+                    className={activeTab === "/orders" ? "text-white px-0 py-2 active" : "text-white px-0 py-2" }
                     style={{ textDecoration: "none" }}
                   ><FaBoxes />
-                    <span className="ms-1">MyOrder{" "} </span>
+                    <span className="ms-1">My Orders{" "} </span>
                   </Nav.Link>
 
-                  <Nav.Link className="text-white px-0 py-2">
-                    <div
-                      style={{ textDecoration: "none" }}
-                    >
-                      <FaUser />
-                      <span className="ms-1">{loginUser?.username}{" "}</span>
-                    </div>
+                  <Nav.Link
+                    as={Link}
+                    to="/cart"
+                    onClick={() => setActive("/cart")}
+                    className={activeTab === "/cart" ? "text-white px-0 py-2 active" : "text-white px-0 py-2" }
+                    style={{ textDecoration: "none" }}
+                  >
+                    <FaShoppingCart /> <span className="ms-1">My bag{" "}</span>
                   </Nav.Link>
                 </>
               )}
 
-              {!isLoggedIn && (
+              {!isSignIn && (
                 <Nav.Link
+                onClick={() => setActive("/register")}
+                className={activeTab === "/register" ? "text-white px-0 py-2 active" : "text-white px-0 py-2" }
                   as={Link}
                   to="/signup"
-                  className="text-white px-0 py-2 "
                   style={{ textDecoration: "none" }}
                 >
                   <FaPlus/>
@@ -88,11 +94,12 @@ const NavBar = () => {
                 </Nav.Link>
               )}
 
-              {!isLoggedIn ? (
+              {!isSignIn ? (
                 <Nav.Link
                   as={Link}
                   to="/login"
-                  className="text-white px-0 py-2"
+                  onClick={() => setActive("/login")}
+                  className={activeTab === "/login" ? "text-white px-0 py-2 active" : "text-white px-0 py-2" }
                   style={{ textDecoration: "none" }}
                 >
                   <FaSignInAlt />

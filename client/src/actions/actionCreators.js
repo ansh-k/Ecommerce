@@ -40,7 +40,7 @@ export const loginFailure = (error) => {
 export const getProductDetails = (result) => {
   return {
     type: GET_PRODUCTS,
-    Products: result
+    Products: payload
   }
 }
 
@@ -57,10 +57,10 @@ export const removeUser = () => {
   }
 }
 
-export const getOrder = (result) => {
+export const getOrder = (payload) => {
   return {
     type: GET_ORDER,
-    orders: result
+    orders: payload
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { Route, Switch } from "react-router-dom";
+import { Switch ,Route } from "react-router-dom";
 import { toast } from "react-toastify";
 import { injectStyle } from "react-toastify/dist/inject-style";
 
@@ -9,11 +9,13 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import PageNotFound from "./pages/PageNotFound";
-import Cart from "./pages/Cart";
+import MyCart from "./pages/MyCart";
 import Order from "./pages/Order";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import { getUser } from "./actions";
+import PageNotFound from "./pages/PageNotFound";
+import "./App.css";
 
 if (typeof window !== "undefined") {
   injectStyle();
@@ -50,7 +52,7 @@ function App() {
         </Route>
         <Route exact path="/cart">
           {isLoggedIn ? (
-            <Cart />
+            <MyCart />
           ) : (
             <div className="login">
               {" "}

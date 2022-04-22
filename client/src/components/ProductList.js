@@ -3,7 +3,7 @@ import { FaCartPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 
-import Model from "./ProductModel";
+import ProductModal from "./ProductModel";
 import { addToCart, getProductsList } from "../actions";
 
 const ProductList = ({ products }) => {
@@ -77,7 +77,7 @@ const ProductList = ({ products }) => {
                           disabled={product.stock < 1}
                         >
                           <FaCartPlus />
-                          <span className="ms-2 ">Add To Cart</span>
+                          <span className="ms-2 ">ADD TO BAG</span>
                         </button>
                       </div>
                     </div>
@@ -89,7 +89,7 @@ const ProductList = ({ products }) => {
         </div>{" "}
       </div>
       {open && (
-        <Model
+        <ProductModal
           handleModal={handleModal}
           open={open}
           handleCart={handleCart}

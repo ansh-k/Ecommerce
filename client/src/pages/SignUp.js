@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 
 import { userSignup } from "../actions";
-// import { getUser } from "../actions";
 
 const SignUp = () => {
   const [newUser, setNewUser] = useState({
@@ -33,8 +32,6 @@ const SignUp = () => {
     if (newUser?.password === newUser?.cpassword) {
       dispatch(userSignup(newUser))
         .then((res) => {
-          // localStorage.setItem("token", res.data.token);
-          // dispatch(getUser(res.data.token));
           toast("registration successfully!", { type: "success" });
           setTimeout(() => {
             history.push("/login");

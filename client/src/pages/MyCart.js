@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaCartPlus } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
 
-import CartModel from "../components/CartModel";
 import Billing from "../components/Billing";
+import CartModel from "../components/CartModel";
+import { updateCart, removeCart } from "../actions";
 import { getAllCarts } from "../actions";
-import { removeCart, updateCart } from "../actions";
 
-const Cart = () => {
-  const [open, setOpen] = useState(false);
+const MyCart = () => {
+  const [modal, setModal] = useState(false);
   const [subTotal, setSubTotal] = useState(0);
 
   const dispatch = useDispatch();
-  let cartList = useSelector((state) => state.data.cartList);
-  const loginUser = useSelector((state) => state?.data?.userinfo);
+  let cartItem = useSelector((state) => state.data.cartItem);
+  const loginUser = useSelector((state) => state?.data?.userData);
 
   useEffect(() => {
     dispatch(getAllCarts());
@@ -23,18 +22,17 @@ const Cart = () => {
 
   useEffect(() => {
     let total = 0;
-    cartList.forEach((item) => {
+    cartItem.forEach((item) => {
       total = total + item.total_price;
     });
     setSubTotal(total);
-  }, [cartList]);
+  }, [cartItem]);
 
-  const handleModal = () => setOpen(!open);
+  const handleModal = () => setModal(!modal);
 
-  const handleRemoveCart = (product) => {
-    console.log(product.id);
-    dispatch(removeCart(product.id))
-      .then((res) => {
+  const handleRemoveItem = (product) => {
+    removeCart(product.id)
+      .then(() => {
         setTimeout(() => {
           dispatch(getAllCarts());
         }, 1000);
@@ -44,50 +42,48 @@ const Cart = () => {
       });
   };
 
-  const handleQuantityInc = (val) => {
-    dispatch(updateCart({ id: val.id, quantity: val.quantity + 1 })).then(() => {
-      setTimeout(() => {
-        dispatch(getAllCarts());
-      }, 500);
-    });
-  };
-
-  const handleQuantityDec = (val) => {
-    dispatch(updateCart({ id: val.id, quantity: val.quantity - 1 })).then(() => {
-      setTimeout(() => {
-        dispatch(getAllCarts());
-      }, 500);
-    });
+  const handleQuantity = (data) => {
+    if (data.flag === "dec") {
+      updateCart({ id: data.val.id, quantity: data.val.quantity - 1 }).then(
+        () => {
+          setTimeout(() => {
+            dispatch(getAllCarts());
+          }, 500);
+        }
+      );
+    } else {
+      updateCart({ id: data.val.id, quantity: data.val.quantity + 1 }).then(() => {
+        setTimeout(() => {
+          dispatch(getAllCarts());
+        }, 500);
+      });
+    }
   };
 
   return (
-    <div>
+    <>
       <div className="container my-2 me-0" style={{ marginTop: "100px" }}>
         <div className=" cart-sec" style={{ display: "flex" }}>
           <div style={{ width: "100%" }}>
-            {cartList.length > 0 && (
+            {cartItem.length > 0 && (
               <h4
                 className="text-decoration-underline"
                 style={{ marginTop: "24px" }}
               >
                 {" "}
-                My Cart <FaShoppingCart />
+                My Bag
+                <FaShoppingCart />
               </h4>
             )}
-            {cartList.length > 0 ? (
+            {cartItem.length > 0 ? (
               <div className="row d-md-flex  d-sm-block d-block my-2">
-                <Billing
-                  cartList={cartList}
-                  subTotal={subTotal}
-                  handleModal={handleModal}
-                />
                 <div className="col-md-6 col-sm-12 col-12  cart-product">
                   <div className="container product-table p-0">
                     <div
                       className="row align-items-stretch"
                       style={{ placeContent: "center" }}
                     >
-                      {cartList.map((val, index) => (
+                      {cartItem.map((val, index) => (
                         <div key={index} className="col-md-6 col-6 h-100">
                           <div className="card my-3 p-0 border-warning">
                             <img
@@ -108,36 +104,36 @@ const Cart = () => {
                               <div className="">
                                 <div className="quantity d-flex align-items-center justify-content-center">
                                   <button
-                                    className="btn btn-primary"
+                                    className="btn"
                                     disabled={val?.quantity === 1}
                                     onClick={(e) => {
                                       e.preventDefault();
-                                      handleQuantityDec(val);
+                                      handleQuantity({ val, flag: "dec" });
                                     }}
                                   >
                                     -
                                   </button>
-                                  <p className="px-3 py-2 mb-0">
+                                  <p className="px-3 py-2 mb-0 bg-warning">
                                     {" "}
                                     {val?.quantity}
                                   </p>
                                   <button
-                                    className="btn btn-primary"
+                                    className="btn "
                                     disabled={val.stock <= val?.quantity}
                                     onClick={(e) => {
                                       e.preventDefault();
-                                      handleQuantityInc(val);
+                                      handleQuantity({ val, flag: "inc" });
                                     }}
                                   >
                                     +
                                   </button>
                                 </div>
                                 <button
-                                  className="btn btn-danger mt-2"
+                                  className="btn text-danger mt-2"
                                   style={{ textSize: "20px" }}
-                                  onClick={() => handleRemoveCart(val)}
+                                  onClick={() => handleRemoveItem(val)}
                                 >
-                                  <FaCartPlus /> Remove
+                                  X Remove
                                 </button>
                               </div>
                             </div>
@@ -147,26 +143,31 @@ const Cart = () => {
                     </div>
                   </div>
                 </div>
+                <Billing
+                  cartItem={cartItem}
+                  subTotal={subTotal}
+                  handleModal={handleModal}
+                />
               </div>
             ) : (
               <div style={{ marginTop: "20%", marginLeft: "35%" }}>
-                Your cart is empty. Add some!{" "}
-                <Link to="/">browse products</Link>
+                Your Basket is empty
+                <Link to="/"> View Some products</Link>
               </div>
             )}
             {/*main row...*/}
           </div>
         </div>
       </div>
-      {open && (
+      {modal && (
         <CartModel
           handleModal={handleModal}
-          open={open}
+          modal={modal}
           total={subTotal}
           user={loginUser}
         />
       )}
-    </div>
+    </>
   );
 };
-export default Cart;
+export default MyCart;

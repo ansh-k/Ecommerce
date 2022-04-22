@@ -2,10 +2,10 @@ import { createReducer } from "../config/reduxUtils";
 import { setReducer } from "./reducer";
 
 const initialState = {
-  cartList: [],
+  cartItem: [],
   user: [],
   products: [],
-  userinfo: null,
+  userData: null,
   isLoggedIn: false,
   orders: [],
 };
