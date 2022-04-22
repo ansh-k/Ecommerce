@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaBoxes, FaCartPlus, FaHome, FaPlus, FaShoppingCart, FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
@@ -20,55 +20,57 @@ const Header = () => {
   const isLoggedIn = useSelector((state) => state?.data?.isLoggedIn);
 
   return (
-    <div className="navbar-fixed">
-      <Navbar className="bg-dark " expand="lg">
+    <div className="navbar-fixed main-nav bg-warning h-100">
+      <Navbar className="flex-wrap">
         <Container>
-          <Navbar.Brand href="#" className="text-white">
-            Ecommerce-Clothing
+          <Navbar.Brand href="/" className="text-white d-flex align-items-center  border-bottom px-0 py-3 mx-0 my-2 w-100">
+          <div className="bg-white text-warning rounded-circle d-flex align-items-center justify-content-center logo-icon"> 
+          <FaCartPlus />
+          </div>
+          <span className="ms-1"> <h6 className="mb-0">Ecommerce Clothing </h6></span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse
             id="basic-navbar-nav"
-            className="justify-content-end"
+            className="justify-content-start text-capitalize"
           >
-            <Nav>
+            <Nav className="flex-column w-100 py-2">
               {isLoggedIn && (
                 <>
                   <Nav.Link
                     as={Link}
                     to="/"
-                    className="text-white"
+                    className="text-white px-0 py-2 active"
                     style={{ textDecoration: "none" }}
                   >
-                    {" "}
-                    Home{" "}
+                   <FaHome />
+                    <span> home</span> 
                   </Nav.Link>
 
                   <Nav.Link
                     as={Link}
                     to="/cart"
-                    className="text-white"
+                    className="text-white px-0 py-2"
                     style={{ textDecoration: "none" }}
                   >
-                    <FaShoppingCart /> MyCart{" "}
+                    <FaShoppingCart /> <span className="ms-1">MyCart{" "}</span>
                   </Nav.Link>
 
                   <Nav.Link
                     as={Link}
                     to="/orders"
-                    className="text-white"
+                    className="text-white px-0 py-2"
                     style={{ textDecoration: "none" }}
-                  >
-                    MyOrder{" "}
+                  ><FaBoxes />
+                    <span className="ms-1">MyOrder{" "} </span>
                   </Nav.Link>
 
-                  <Nav.Link>
+                  <Nav.Link className="text-white px-0 py-2">
                     <div
-                      className="text-white"
                       style={{ textDecoration: "none" }}
                     >
                       <FaUser />
-                      {loginUser?.username}{" "}
+                      <span className="ms-1">{loginUser?.username}{" "}</span>
                     </div>
                   </Nav.Link>
                 </>
@@ -78,10 +80,11 @@ const Header = () => {
                 <Nav.Link
                   as={Link}
                   to="/register"
-                  className="text-white"
+                  className="text-white px-0 py-2 "
                   style={{ textDecoration: "none" }}
                 >
-                  Sign up
+                  <FaPlus/>
+                  <span className="ms-1">Sign up</span>
                 </Nav.Link>
               )}
 
@@ -89,19 +92,20 @@ const Header = () => {
                 <Nav.Link
                   as={Link}
                   to="/login"
-                  className="text-white mx-3"
+                  className="text-white px-0 py-2"
                   style={{ textDecoration: "none" }}
                 >
-                  {" "}
-                  Login{" "}
+                  <FaSignInAlt />
+                  <span className="ms-1">Sign In</span>
                 </Nav.Link>
               ) : (
                 <Nav.Link
-                  className="text-white "
+                  className="text-white px-0 py-2 "
                   onClick={(e) => handleLogout(e)}
                   style={{ textDecoration: "none" }}
                 >
-                  Logout
+                  <FaSignOutAlt />
+                  <span className="ms-1">Sign Out </span>
                 </Nav.Link>
               )}
             </Nav>

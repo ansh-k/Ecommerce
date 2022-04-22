@@ -29,8 +29,8 @@ const Login = () => {
   };
 
   return (
-    <div className="login-form bg-light border border-success">
-      <h4 style={{ textAlign: "center" }}>Login</h4>
+    <div className="login-form bg-light border border-warning">
+      <h4 className="text-center text-decoration-underLine text-uppercase" style={{ textAlign: "center" }}>Login</h4>
       <form onSubmit={(e) => handleLogin(e)}>
         <table>
           <tbody>
@@ -60,13 +60,13 @@ const Login = () => {
         </table>
         <div style={{ textAlign: "center" }}>
           <div style={{ margin: "10px" }}>
-            <Button className="btn btn-success" type="submit">
+            <Button className="btn btn-warning text-white" type="submit">
               Login
             </Button>
           </div>
           <Link
             to="/register"
-            style={{ textDecoration: "none", color: "blue" }}
+            style={{ textDecoration: "none", color: "#ffc720", fontweight: "bold" }}
           >
             Sign up
           </Link>

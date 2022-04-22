@@ -28,7 +28,7 @@ function CartModel({ open, handleModal, total, user }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="modal-body">
+        <div className="modal-body bg-white">
           <div className="body-name">
             <FaUser /> <strong>Name: {user.username} </strong>
           </div>
@@ -40,7 +40,7 @@ function CartModel({ open, handleModal, total, user }) {
       </Modal.Body>
       <Modal.Footer className="bg-light">
         <button
-          className="btn btn-success mt-2"
+          className="btn btn-dark mt-2"
           style={{ textSize: "20px" }}
           onClick={orderPlaced}
         >

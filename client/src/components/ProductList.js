@@ -49,47 +49,55 @@ const ProductList = ({ products }) => {
   };
 
   return (
-    <div className="container databg-light product-table my-2">
+    <div className="container databg-light product-table cart-sec my-2">
       <div
         className="row mx-0 align-items-stretch"
         style={{ placeContent: "center" }}
       >
-        {products?.map((product, index) => {
-          return (
-            <div key={index} className="col-md-3 col-sm-6 col-6 my-3">
-              <div
-                className="card p-md-3 p-sm-2 p-2 bg-light h-100"
-                onClick={() => handleProductSelection(product)}
-              >
-                <img className="card-img-top" src={product.image} alt="Card" />
-                <div className="card-body text-center px-0">
-                  <h4 className="card-title"> {product.productName} </h4>
-                  <p className="card-text">
-                    <strong>${product.price}</strong>
-                  </p>
-                  <p> stock {product.stock}</p>
-                  <p
-                    className="text-primary"
-                    // onClick={() => handleDescription(index)}
+        <div className="col-md-11 ms-auto">
+          <div className="row mx-0">
+            {products?.map((product, index) => {
+              return (
+                <div key={index} className="col-md-6 col-sm-12 col-12 my-3">
+                  <div
+                    className="card p-md-3 p-sm-2 p-2 bg-light h-100 d-flex flex-row shadow border-warning"
+                    onClick={() => handleProductSelection(product)}
                   >
-                    {/*{index === desc ? "Show Less" : "About Product"}*/}
-                  </p>
-                  <div className="">
-                    <button
-                      className="btn btn-success mt-2"
-                      style={{ textSize: "20px" }}
-                      onClick={() => handleCart(product)}
-                      disabled={product.stock < 1}
-                    >
-                      <FaCartPlus />
-                      Add To Cart
-                    </button>
+                    <img
+                      className="card-img-top w-50"
+                      src={product.image}
+                      alt="Card"
+                    />
+                    <div className="card-body text-start">
+                      <h4 className="card-title"> {product.productName} </h4>
+                      <p className="card-text mb-2">
+                        <strong>${product.price}</strong>
+                      </p>
+                      <p className="mb-0"> stock {product.stock}</p>
+                      <p
+                        className="text-primary"
+                        // onClick={() => handleDescription(index)}
+                      >
+                        {/*{index === desc ? "Show Less" : "About Product"}*/}
+                      </p>
+                      <div className="">
+                        <button
+                          className="btn btn-warning mt-2  text-white shadow"
+                          style={{ textSize: "20px" }}
+                          onClick={() => handleCart(product)}
+                          disabled={product.stock < 1}
+                        >
+                          <FaCartPlus />
+                          <span className="ms-2 ">Add To Cart</span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+        </div>{" "}
       </div>
       {open && (
         <Model

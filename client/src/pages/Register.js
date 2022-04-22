@@ -48,8 +48,8 @@ const Register = () => {
   };
 
   return (
-    <div className="register-form bg-light border border-success shadow">
-      <h4 style={{ textAlign: "center" }}>Sign up</h4>
+    <div className="register-form bg-light border border-warning shadow">
+      <h4 className="text-center text-decoration-underline text-uppercase">Sign up</h4>
       <div>
         <form onSubmit={(e) => handleSubmit(e)}>
           <table>
@@ -101,7 +101,7 @@ const Register = () => {
             </tbody>
           </table>
           <div style={{ textAlign: "center" }}>
-            <Button className="btn btn-success my-2" type="submit">
+            <Button className="btn btn-warning text-white my-2" type="submit">
               Sign up
             </Button>
             {validation ? (
@@ -109,7 +109,7 @@ const Register = () => {
             ) : (
               <br />
             )}
-            <Link to="/login" style={{ textDecoration: "none", color: "blue" }}>
+            <Link to="/login" style={{ textDecoration: "none", color: "#ffc720" , fontWeight: "bold" }}>
               <IoLogIn />
               Login
             </Link>
