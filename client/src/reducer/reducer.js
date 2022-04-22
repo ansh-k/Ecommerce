@@ -28,6 +28,12 @@ const productReducer = (state, action) => ({
   products: action?.Products,
 });
 
+//order
+const getOrder = (state, action) => ({
+  ...state,
+  orders: action?.orders,
+});
+
 //user
 const getUser = (state, action) => ({
   ...state,
@@ -49,4 +55,5 @@ export const setReducer = {
   [constants.GET_PRODUCTS]: productReducer,
   [constants.GET_USER]: getUser,
   [constants.CLEAR_USER]: clearUser,
+  [constants.GET_ORDER]: getOrder,
 };

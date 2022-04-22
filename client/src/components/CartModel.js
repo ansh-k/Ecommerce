@@ -3,17 +3,20 @@ import { Modal } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { FaUser } from "react-icons/fa";
 import { useHistory } from "react-router";
-import { removeCart } from "../actions";
+import { useDispatch } from "react-redux";
+import { removeCart, getAllOrders } from "../actions";
 
 function CartModel({ open, handleModal, total, user }) {
+  const dispatch = useDispatch();
   toast.configure();
   const history = useHistory();
 
   const orderPlaced = () => {
     handleModal();
-    history.push("/");
+    dispatch(getAllOrders());
+    history.push("/orders");
     toast("Order placed successfully!", { type: "success" });
-    removeCart();
+    dispatch(removeCart());
   };
 
   return (

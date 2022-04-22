@@ -10,44 +10,66 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PageNotFound from "./pages/PageNotFound";
 import Cart from "./pages/Cart";
+import Order from "./pages/order";
 import "./App.css";
 import Header from "./components/Header";
 import { getUser } from "./actions";
-
 
 if (typeof window !== "undefined") {
   injectStyle();
 }
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const history = useHistory();
-  const isLoggedIn = useSelector(state => state?.data?.isLoggedIn);
-  
+  const isLoggedIn = useSelector((state) => state?.data?.isLoggedIn);
+
   useEffect(() => {
-    toast.configure()
-    const token = localStorage.getItem("token")
+    toast.configure();
+    const token = localStorage.getItem("token");
     if (token) {
-      dispatch(getUser(token))
+      dispatch(getUser(token));
     } else {
-      history.push("/login")
+      history.push("/login");
     }
-  }, [dispatch, history])
+  }, [dispatch, history]);
 
   return (
     <div className="App">
       <Header />
       <Switch>
         <Route exact path="/">
-          {isLoggedIn ? <Home /> : <div className="login"> <Login /></div>}
+          {isLoggedIn ? (
+            <Home />
+          ) : (
+            <div className="login">
+              {" "}
+              <Login />
+            </div>
+          )}
         </Route>
         <Route exact path="/cart">
-          {isLoggedIn ? <Cart /> : <div className="login"> <Login /> </div>}
+          {isLoggedIn ? (
+            <Cart />
+          ) : (
+            <div className="login">
+              {" "}
+              <Login />{" "}
+            </div>
+          )}
+        </Route>
+        <Route exact path="/orders">
+          {isLoggedIn ? (
+            <Order />
+          ) : (
+            <div className="login">
+              {" "}
+              <Login />{" "}
+            </div>
+          )}
         </Route>
         <Route path="/login">
-          <div className="login">
-            {!isLoggedIn ? <Login /> : <Home />}
-          </div>
+          <div className="login">{!isLoggedIn ? <Login /> : <Home />}</div>
         </Route>
         <Route path="/register">
           <div className="register">
@@ -59,7 +81,6 @@ function App() {
             <PageNotFound />
           </div>
         </Route>
-
       </Switch>
     </div>
   );

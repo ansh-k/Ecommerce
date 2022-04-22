@@ -7,6 +7,7 @@ const initialState = {
   products: [],
   userinfo: null,
   isLoggedIn: false,
+  orders: [],
 };
 
 const handlers = {

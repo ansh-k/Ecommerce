@@ -5,8 +5,8 @@ import { IoLogIn } from "react-icons/io5";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { userRegister } from "../actions";
-import { getUser } from "../actions";
-import { useDispatch } from "react-redux";
+// import { getUser } from "../actions";
+// import { useDispatch } from "react-redux";
 
 const Register = () => {
   const [newUser, setNewUser] = useState({
@@ -19,7 +19,7 @@ const Register = () => {
   const [validation, setValidation] = useState(false);
 
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   toast.configure();
 
   const handleChange = (e) => {

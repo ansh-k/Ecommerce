@@ -68,6 +68,21 @@ export const getProducts = () => {
   });
 };
 
+//orders
+
+export const getOrders = () => {
+  const token = localStorage.getItem("token");
+
+  return axios({
+    method: "GET",
+    url: `${API_BASE_URL}/orders`,
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 //user
 
 export const userLogin = (user) => {

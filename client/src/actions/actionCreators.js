@@ -6,6 +6,7 @@ import {
   GET_PRODUCTS,
   GET_USER,
   CLEAR_USER,
+  GET_ORDER,
 } from "../constant";
 
 export const successGetCarts = (result) => {
@@ -55,5 +56,13 @@ export const clearUser = () => {
     type: CLEAR_USER
   }
 }
+
+export const getOrder = (result) => {
+  return {
+    type: GET_ORDER,
+    orders: result
+  }
+}
+
 
 

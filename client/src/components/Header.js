@@ -53,6 +53,15 @@ const Header = () => {
                     <FaShoppingCart /> MyCart{" "}
                   </Nav.Link>
 
+                  <Nav.Link
+                    as={Link}
+                    to="/orders"
+                    className="text-white"
+                    style={{ textDecoration: "none" }}
+                  >
+                    MyOrder{" "}
+                  </Nav.Link>
+
                   <Nav.Link>
                     <div
                       className="text-white"

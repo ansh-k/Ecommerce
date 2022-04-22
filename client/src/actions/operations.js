@@ -1,6 +1,6 @@
 import * as actions from "./actionCreators";
 import { toast } from "react-toastify";
-import { getCarts, getProducts, getUserApi } from "./integrations";
+import { getCarts, getProducts, getUserApi, getOrders } from "./integrations";
 
 export const getAllCarts = () => (dispatch) => {
   getCarts()
@@ -29,6 +29,18 @@ export const getAllProducts = () => {
     getProducts()
       .then((result) => {
         dispatch(actions.successGetProducts(result.data));
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
+};
+
+export const getAllOrders = () => {
+  return function (dispatch) {
+    getOrders()
+      .then((result) => {
+        dispatch(actions.getOrder(result.data));
       })
       .catch((error) => {
         console.log("error", error);

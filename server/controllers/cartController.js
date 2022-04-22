@@ -5,7 +5,6 @@ const products = require("../mockData/products.json");
 exports.addToCart = async (req, res) => {
   const { id } = req.params;
   const data = products.filter((item) => item.id == id)[0];
-  getProducts(data)
   if (data) {
     const fillCarts = carts.filter((item) => item.product_id == id);
     if (fillCarts.length > 0) {
